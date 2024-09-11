@@ -39,26 +39,26 @@ namespace F.ExperienceUI
         {
             if (this.Configuration.Instance.UconomyMode == false)
             {
-                EffectManager.sendUIEffect(this.Configuration.Instance.ExperienceUI, (short)32401, player.CSteamID, true, this.Configuration.Instance.EconomySymbol + player.Experience.ToString());
+                EffectManager.sendUIEffect(this.Configuration.Instance.ExperienceUI, (short)32401, player.Player.channel.GetOwnerTransportConnection(), true, this.Configuration.Instance.EconomySymbol + player.Experience.ToString());
             }
-            else { EffectManager.sendUIEffect(this.Configuration.Instance.ExperienceUI, (short)32401, player.CSteamID, true, this.Configuration.Instance.EconomySymbol + Uconomy.Instance.Database.GetBalance(player.Id).ToString()); }
-            EffectManager.sendUIEffect(this.Configuration.Instance.ServerNameUI, (short)32403, player.CSteamID, true, this.Configuration.Instance.ServerName.ToString());
+            else { EffectManager.sendUIEffect(this.Configuration.Instance.ExperienceUI, (short)32401, player.Player.channel.GetOwnerTransportConnection(), true, this.Configuration.Instance.EconomySymbol + Uconomy.Instance.Database.GetBalance(player.Id).ToString()); }
+            EffectManager.sendUIEffect(this.Configuration.Instance.ServerNameUI, (short)32403, player.Player.channel.GetOwnerTransportConnection(), true, this.Configuration.Instance.ServerName.ToString());
         }
 
         private void Events_OnPlayerUpdateExperience(UnturnedPlayer player, uint experience)
         {
-            EffectManager.sendUIEffect(this.Configuration.Instance.ExperienceUI, (short)32401, player.CSteamID, true, this.Configuration.Instance.EconomySymbol + player.Experience.ToString());
+            EffectManager.sendUIEffect(this.Configuration.Instance.ExperienceUI, (short)32401, player.Player.channel.GetOwnerTransportConnection(), true, this.Configuration.Instance.EconomySymbol + player.Experience.ToString());
         }
 
         private void UconomyOnBalanceUpdate(UnturnedPlayer player, decimal v)
         {
-            EffectManager.sendUIEffect(this.Configuration.Instance.ExperienceUI, (short)32401, player.CSteamID, true, this.Configuration.Instance.EconomySymbol + Uconomy.Instance.Database.GetBalance(player.Id).ToString());
+            EffectManager.sendUIEffect(this.Configuration.Instance.ExperienceUI, (short)32401, player.Player.channel.GetOwnerTransportConnection(), true, this.Configuration.Instance.EconomySymbol + Uconomy.Instance.Database.GetBalance(player.Id).ToString());
         }
 
         private void Events_OnPlayerDisconnected(UnturnedPlayer player)
         {
-            EffectManager.askEffectClearByID(this.Configuration.Instance.ExperienceUI, player.CSteamID);
-            EffectManager.askEffectClearByID(this.Configuration.Instance.ServerNameUI, player.CSteamID);
+            EffectManager.askEffectClearByID(this.Configuration.Instance.ExperienceUI, player.Player.channel.GetOwnerTransportConnection());
+            EffectManager.askEffectClearByID(this.Configuration.Instance.ServerNameUI, player.Player.channel.GetOwnerTransportConnection());
         }
 
         protected override void Unload()
